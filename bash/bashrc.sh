@@ -185,8 +185,8 @@ fi
 
 # Personal Bin
 export PATH=~/.bin/:$PATH
-if [ -f ~/.bin/paths ]; then
-  export PATH=~/.bin/paths/:$PATH
+if [ -f ~/.bin/paths.sh ]; then
+  source ~/.bin/paths.sh
 fi
 
 # Key Bindings
