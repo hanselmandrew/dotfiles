@@ -53,6 +53,7 @@ call plug#end()
 
 """"" Always needs these basic settings
 set relativenumber
+set number
 set scrolloff=10
 set tabstop=2
 set softtabstop=2
