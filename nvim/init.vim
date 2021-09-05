@@ -36,7 +36,6 @@ call plug#begin('~/.vim/plugged')
 
   " Git
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'sindrets/diffview.nvim'
 
   " Fast file switching/searching with telescope + dependencies
   Plug 'nvim-lua/popup.nvim'
@@ -75,56 +74,13 @@ nnoremap <S-Tab> :tabprevious <cr>
 
 nnoremap <leader><leader> :nohl <cr>
 
-
-""""" Plug 'sindrets/diffview.nvim'
-function! DiffBranch()
-  let forkhash = system('git merge-base HEAD master')
-  echo forkhash
-  execute 'DiffviewOpen' forkhash
-endfunction
-command! DiffBranch call DiffBranch()
-
-lua << EOF
-local cb = require'diffview.config'.diffview_callback
-require'diffview'.setup {
-  diff_binaries = false,    -- Show diffs for binaries
-  file_panel = {
-    width = 35,
-    use_icons = false
-  },
-  key_bindings = {
-    disable_defaults = true,                   -- Disable the default key bindings
-
-    -- The `view` bindings are active in the diff buffers, only when the current
-    -- tabpage is a Diffview.
-    view = {
-      ["<leader>e"] = cb("focus_files"),        -- Bring focus to the files panel
-      ["<leader>b"] = cb("toggle_files"),       -- Toggle the files panel.
-    },
-    file_panel = {
-      ["j"]             = cb("next_entry"),         -- Bring the cursor to the next file entry
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),         -- Bring the cursor to the previous file entry.
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),       -- Open the diff for the selected entry.
-      ["o"]             = cb("select_entry"),
-      ["<2-LeftMouse>"] = cb("select_entry"),
-      ["-"]             = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
-      ["S"]             = cb("stage_all"),          -- Stage all entries.
-      ["U"]             = cb("unstage_all"),        -- Unstage all entries.
-      ["R"]             = cb("refresh_files"),      -- Update stats and entries in the file list.
-      ["<leader>e"]     = cb("focus_files"),
-      ["<leader>b"]     = cb("toggle_files"),
-    }
-  }
-}
-EOF
-
 """"" Plug 'lewis6991/gitsigns.nvim'
 lua << EOF
 require("gitsigns").setup {
   current_line_blame = true,
-  current_line_blame_delay = 1000,
+  current_line_blame_opts = {
+    delay = 1000
+  }
 }
 EOF
 

@@ -190,5 +190,5 @@ if [ -f ~/.bin/paths.sh ]; then
 fi
 
 # Key Bindings
-source ~/.bash/fzf-bindings.sh
+source ~/.config/bash/fzf-bindings.sh
 
